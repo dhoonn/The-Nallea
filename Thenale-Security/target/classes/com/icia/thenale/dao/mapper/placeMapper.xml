@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Place">
+	<select id="typeChoice" resultType="place">
+		select * from tb_place where p_type_num = #{p_type_num} and p_with_num=#{p_with_num}
+		and p_name=#{p_name}
+	</select>
+</mapper>
+ 

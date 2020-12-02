@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaomemberJoin" parameterType="member">
+		insert into
+		tb_member(m_num, m_id, m_k_id, m_password, m_name, m_email, m_phone,
+		m_profile, m_auth, m_permit)
+		values(member_seq.nextval,
+		#{m_id},#{m_k_id},
+		#{m_password}, #{m_name}, #{m_email}, #{m_phone},
+		#{m_profile}, 'C', 0)
+	</insert>
+
+	<!-- 네이버 회원가입 -->
+	<insert id="navermemberJoin" parameterType="member">
+		insert into
+		tb_member(m_num, m_id, m_n_id, m_password, m_name, m_email, m_phone,
+		m_profile, m_auth, m_permit)
+		values(member_seq.nextval, #{m_id},
+		#{m_n_id},
+		#{m_password}, #{m_name}, #{m_email}, #{m_phone},
+		#{m_profile}, 'C', 0)
+	</insert>
+
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="member">
+		insert into
+		tb_member(m_id, m_password, m_name, m_email, m_phone, m_profile,
+		m_auth, m_permit)
+		values(#{m_id}, #{m_password}, #{m_name}, #{m_email},
+		#{m_phone}, #{m_profile}, 'C', 0)
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="memberLogin" parameterType="member"
+		resultType="String">
+		select m_id from tb_member where m_id = #{m_id} and
+		m_password = #{m_password}
+	</select>
+
+	<!-- 카카오 로그인 -->
+	<select id="kakaoLogin" parameterType="String"
+		resultType="String">
+
+		select m_id from tb_member where m_k_id = #{m_k_id}
+
+	</select>
+
+	<!-- 네이버 로그인 -->
+	<select id="naverLogin" parameterType="String"
+		resultType="String">
+
+		select m_id from tb_member where m_n_id= #{m_n_id}
+
+	</select>
+
+	<!-- 내 정보 mypage -->
+	<select id="memberView" parameterType="String"
+		resultType="member">
+		select * from tb_member where m_id = #{m_id}
+	</select>
+
+	<!-- 수정 -->
+	<update id="memberUpdate" parameterType="member">
+		update tb_member set
+		m_id = #{m_id}, m_password = #{m_password}, m_name = #{m_name},
+		m_email = #{m_email}, m_phone = #{m_phone}, m_profile = #{m_profile}
+		where m_id = #{m_id}
+	</update>
+
+	<!-- 아이디 중복확인 -->
+	<select id="idOverlap" parameterType="String"
+		resultType="String">
+		select m_id from tb_member where m_id = #{m_id}
+	</select>
+
+	<!-- 날짜 -->
+	<insert id="dateinsert" parameterType="schedule">
+		insert into
+		tb_schedule(s_num, s_startdate, s_enddate, s_count, m_id)
+		values(seq_schedule.nextval, #{s_startdate}, #{s_enddate}, #{s_count},
+		#{m_id})
+	</insert>
+
+	<!-- 날짜 확인 -->
+	<select id="dateselect" resultType="schedule">
+		select * from tb_schedule
+		where s_num=(select max(s_num) from tb_schedule)
+	</select>
+</mapper>
+ 

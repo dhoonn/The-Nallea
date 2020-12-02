@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Food">
+
+	<!-- 식당 추가 -->
+	<insert id="foodAdd" parameterType="company">
+		insert into tb_food(f_num,
+		f_c_id, f_name, f_contents, f_photo, f_x, f_y, f_area, f_address,
+		f_hits)
+		values(food_seq.NEXTVAL, #{c_id}, #{c_name}, #{c_contents},
+		#{c_photo}, #{c_x}, #{c_y}, #{c_area}, #{c_address}, 0)
+	</insert>
+
+	<!-- 식당 리스트 -->
+	<select id="foodList" parameterType="String" resultType="food">
+		select *
+		from tb_food where f_area = #{f_area}
+	</select>
+
+	<!-- 식당 상세조회_관리자 -->
+	<select id="foodview_admin" parameterType="int"
+		resultType="food">
+		select *
+		from tb_food where f_num = #{f_num}
+	</select>
+
+	<!-- 식당 상세조회_업주 -->
+	<select id="foodview_owner" parameterType="String"
+		resultType="food">
+		select *
+		from tb_food where f_c_id = #{f_c_id}
+	</select>
+
+	<!-- 식당 리뷰작성 -->
+	<insert id="fReviewwrite" parameterType="f_review">
+		insert into
+		tb_food_review(f_num, f_r_num, f_r_m_id, f_r_title, f_r_photo,
+		f_r_contents)
+		values(#{f_num}, f_review_seq.nextval, #{f_r_m_id},
+		#{f_r_title}, #{f_r_photo},
+		#{f_r_contents})
+	</insert>
+
+	<!-- 식당리뷰 리스트 -->
+	<select id="fReviewList" parameterType="int"
+		resultType="f_review">
+
+		select * from tb_food_review where f_num = #{f_num}
+
+	</select>
+
+	<!-- 식당리뷰조회 -->
+	<select id="fReviewView" resultType="f_review">
+
+		select * from tb_food_review
+		where f_num=#{f_num}
+
+	</select>
+	
+	<!-- 식당 메뉴추가 -->
+	<insert id="foodmenuadd" parameterType="f_menu">
+
+		insert into tb_food_menu
+		(f_m_f_num, f_m_num, f_m_name, f_m_price, f_m_foodimg)
+		values
+		(#{f_m_f_num}, tb_food_menu_seq.nextval, #{f_m_name}, #{f_m_price},
+		#{f_m_foodimg})
+
+	</insert>
+
+	<!-- 식당메뉴 선택 -->
+	<select id="addmenusel" resultType="int" parameterType="String">
+
+
+		select
+		f_num from tb_food where f_c_id = #{f_c_id}
+
+	</select>
+
+</mapper>
+ 
+ 

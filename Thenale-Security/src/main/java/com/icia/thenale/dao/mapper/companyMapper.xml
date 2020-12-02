@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Company">
+
+	<!-- 업체 가입 -->
+	<insert id="companyJoin" parameterType="company">
+		insert into
+		tb_company(c_id, c_password, c_name, c_photo, c_contents, c_address,
+		c_y, c_x, c_sort, c_ceo_tel, c_ceo, c_area, c_auth)
+		values (#{c_id},
+		#{c_password}, #{c_name}, #{c_photo}, #{c_contents}, #{c_address},
+		#{c_y}, #{c_x}, #{c_sort}, #{c_ceo_tel}, #{c_ceo}, #{c_area}, 'c')
+	</insert>
+	
+	<!-- 업체 로그인 -->
+	<select id="companyLogin" parameterType="company"
+		resultType="String">
+		select c_id from tb_company where c_id = #{c_id} and
+		c_password = #{c_password}
+	</select>
+	
+	<!-- 업체 리스트 -->
+	<select id="companyList" resultType="company">
+		select * from tb_company
+	</select>
+	
+	<!-- 업체 상세조회 -->
+	<select id="companyView" parameterType="String"
+		resultType="company">
+		select * from tb_company where c_id = #{c_id}
+	</select>
+	
+	<!-- 업체 승인 -->
+	<update id="companyAdmission" parameterType="company">
+		update tb_company
+		set c_auth = 'b' where c_id = #{c_id}
+	</update>
+
+	<!-- 업체 삭제 -->
+	<delete id="companyDelete" parameterType="String">
+
+		delete from tb_company
+		where c_id=#{c_id}
+
+	</delete>
+
+</mapper>

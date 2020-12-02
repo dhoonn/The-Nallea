@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IndexList">
+
+	<select id="hotelList" parameterType="hotel" resultType="hotel">
+		select *
+		from tb_hotel
+	</select>
+
+	<select id="foodList" parameterType="food" resultType="food">
+		select *
+		from tb_food
+	</select>
+
+	<select id="placeList" parameterType="place" resultType="place">
+		select *
+		from tb_place
+	</select>
+
+	<select id="foodReviewList" parameterType="f_review"
+		resultType="f_review">
+
+		select * from tb_food_review
+
+	</select>
+	<select id="hotelReviewList" parameterType="h_review"
+		resultType="h_review">
+
+		select * from tb_hotel_review
+
+	</select>
+
+	<select id="hotelListPaging" parameterType="page"
+		resultType="hotel">
+
+		SELECT *
+		FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY
+		h_HITS
+		DESC)
+		AS RN FROM
+		tb_hotel B) WHERE RN BETWEEN #{startRow} AND
+		#{endRow}
+
+
+	</select>
+
+</mapper>
+ 

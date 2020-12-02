@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Hotel">
+
+	<!-- 호텔 추가 -->
+	<insert id="hotelAdd" parameterType="company">
+		insert into tb_hotel(h_num,
+		h_c_id, h_name, h_contents, h_photo, h_x, h_y, h_area, h_address,
+		h_hits)
+		values(hotel_seq.NEXTVAL, #{c_id}, #{c_name}, #{c_contents},
+		#{c_photo}, #{c_x}, #{c_y}, #{c_area}, #{c_address}, 0)
+	</insert>
+
+	<!-- 호텔 리스트 -->
+	<select id="hotelList" parameterType="String" resultType="hotel">
+		select
+		* from tb_hotel where h_area = #{h_area}
+	</select>
+
+	<!-- 호텔 상세조회_업주 -->
+	<select id="hotelView_owner" parameterType="String">
+		select * from
+		tb_hotel where h_num=#{h_num}
+	</select>
+
+	<!-- 호텔상세조회_관리자 -->
+	<select id="hotelView" parameterType="int" resultType="hotel">
+		select *
+		from tb_hotel where h_num=#{h_num}
+	</select>
+
+	<!-- 호텔 객실 상세조회 -->
+	<select id="hotelRoomView" parameterType="int"
+		resultType="h_room">
+		select * from tb_hotel_room where h_num=#{h_num}
+	</select>
+
+	<!-- 호텔 조회수 -->
+	<update id="hotelHits" parameterType="int">
+		update tb_hotel set h_hits
+		= h_hits+1 where h_num=#{h_num}
+	</update>
+
+	<!-- 호텔 객실 선택 -->
+	<select id="addroomsel" resultType="int" parameterType="String">
+
+		select
+		h_num from tb_hotel where h_c_id= #{h_c_id}
+
+
+	</select>
+
+	<!-- 호텔 객실 추가 -->
+	<insert id="roomadd">
+
+		insert into tb_hotel_room (h_num, h_title, h_detail,
+		h_person, h_price,
+		h_subimg, h_book) values (#{h_num}, #{h_title},
+		#{h_detail}, #{h_person}, #{h_price}, #{h_subimg}, 0)
+
+	</insert>
+
+	<!-- 호텔 객실 리스트(페이징) -->
+	<select id="hotelListCount" resultType="int">
+
+		select count(h_num) from
+		tb_hotel
+
+	</select>
+
+</mapper>
+ 
