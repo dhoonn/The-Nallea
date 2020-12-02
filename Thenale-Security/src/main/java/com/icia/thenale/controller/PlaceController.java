@@ -21,7 +21,7 @@ public class PlaceController {
 		// 여행지 검색
 		@RequestMapping(value = "/areasearch")
 		public String areasearch() {
-			return "placev/searchpage";
+			return "guest/placev/searchpage";
 		}
 
 		// 여행지 선택

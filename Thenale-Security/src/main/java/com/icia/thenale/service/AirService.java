@@ -31,7 +31,7 @@ public class AirService {
 		airList = ApiExplorer.main(args); // 조건을 ApiExplorer.main으로 보내고 결과를 mav에 저장해온다. mav에 있는 list dao랑 mapper로 보내야함.
 		System.out.println("###"+airList+"###");
 		mav.addObject("airList", airList);
-		mav.setViewName("air/airsearchresult"); 
+		mav.setViewName("member/air/airsearchresult"); 
 		return mav;
 	}
 // airsearchresult

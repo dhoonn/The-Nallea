@@ -53,7 +53,7 @@ public class CompanyService {
 
 		int result = cDAO.companyJoin(company);
 		if (result > 0)
-			mav.setViewName("companyv/companylogin");
+			mav.setViewName("secu/companylogin");
 		return mav;
 	}
 
@@ -64,7 +64,7 @@ public class CompanyService {
 
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
-			mav.setViewName("companyv/companypage");
+			mav.setViewName("company/companyv/companypage");
 		} else {
 			mav.setViewName("indexfail");
 		}
@@ -81,7 +81,7 @@ public class CompanyService {
 		mav = new ModelAndView();
 		List<CompanyDTO> cList = cDAO.compnayList();
 		mav.addObject("cList", cList);
-		mav.setViewName("memberv/admin");
+		mav.setViewName("admin/admin");
 		return mav;
 
 	}
@@ -92,7 +92,7 @@ public class CompanyService {
 		CompanyDTO cDTO = cDAO.companyView(c_id);
 
 		mav.addObject("cDTO", cDTO);
-		mav.setViewName("companyv/companyview");
+		mav.setViewName("company/companyv/companyview");
 		return mav;
 	}
 

@@ -28,7 +28,7 @@ public class FoodService {
 		mav = new ModelAndView();
 		int foodAddmitionResult = fDAO.foodAdd(company);
 		if (foodAddmitionResult > 0) {
-			mav.setViewName("companyv/companyview");
+			mav.setViewName("company/companyv/companyview");
 		} else {
 			mav.setViewName("fail");
 		}
@@ -42,7 +42,7 @@ public class FoodService {
 
 		fList = fDAO.foodList(f_area);
 		mav.addObject("fList", fList);
-		mav.setViewName("companyv/foodList");
+		mav.setViewName("guest/foodv/foodList");
 		return mav;
 	}
 
@@ -55,7 +55,7 @@ public class FoodService {
 		mav.addObject("fReviewview", fReviewview);
 
 		mav.addObject("fDTO", fDTO);
-		mav.setViewName("foodv/foodview");
+		mav.setViewName("guest/foodv/foodview");
 		return mav;
 	}
 
@@ -87,7 +87,7 @@ public class FoodService {
 		int addmenuResult = fDAO.addmenu(f_c_id);
 		if (addmenuResult > 0) {
 			mav.addObject("addmenuResult", addmenuResult);
-			mav.setViewName("foodv/addmenu");
+			mav.setViewName("guest/foodv/addmenu");
 
 		}
 
@@ -112,7 +112,7 @@ public class FoodService {
 
 		int foodmenuaddResult = fDAO.foodmenuadd(foodMenu);
 		if (foodmenuaddResult > 0) {
-			mav.setViewName("foodv/addmenu");
+			mav.setViewName("guest/foodv/addmenu");
 		}
 		return mav;
 	}

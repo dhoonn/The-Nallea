@@ -28,11 +28,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="memberJoin" parameterType="member">
-		insert into
-		tb_member(m_id, m_password, m_name, m_email, m_phone, m_profile,
-		m_auth, m_permit)
-		values(#{m_id}, #{m_password}, #{m_name}, #{m_email},
-		#{m_phone}, #{m_profile}, 'C', 0)
+		insert into tb_member(m_id, m_password, m_name, m_email, m_phone, m_profile, m_authority, m_permit, ENABLED)
+		values(#{m_id}, #{m_password}, #{m_name}, #{m_email}, #{m_phone}, #{m_profile}, 'ROLE_MEMBER', 0, 1)
 	</insert>
 
 	<!-- 로그인 -->

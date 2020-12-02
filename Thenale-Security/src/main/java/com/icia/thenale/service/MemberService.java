@@ -42,7 +42,7 @@ public class MemberService {
 		member.setM_profile(m_profile);
 		int result = mDAO.memberJoin(member);
 		if (result > 0)
-			mav.setViewName("memberv/memberlogin");
+			mav.setViewName("secu/memberlogin");
 		else
 			mav.setViewName("fail");
 		return mav;
@@ -68,7 +68,7 @@ public class MemberService {
 		MemberDTO mDTO = mDAO.memberView(m_id);
 
 		mav.addObject("mDTO", mDTO);
-		mav.setViewName("memberv/mypage");
+		mav.setViewName("member/memberv/mypage");
 		return mav;
 	}
 
@@ -78,7 +78,7 @@ public class MemberService {
 		MemberDTO mDTO = mDAO.memberView(m_id);
 
 		mav.addObject("mDTO", mDTO);
-		mav.setViewName("memberv/memberupdate");
+		mav.setViewName("member/memberv/memberupdate");
 		return mav;
 	}
 
@@ -144,7 +144,7 @@ public class MemberService {
 		ScheduleDTO sDTO = mDAO.dateselect();
 		mav.addObject("sche", sDTO);
 		if (result > 0) {
-			mav.setViewName("memberv/membercalendar");
+			mav.setViewName("member/memberv/membercalendar");
 		} else {
 			mav.setViewName("fail");
 		}

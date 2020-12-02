@@ -81,13 +81,13 @@ public class MemberController {
 	// 이메일 화면
 	@RequestMapping(value = "/goemail")
 	public String gomail() {
-		return "memberv/email";
+		return "member/memberv/email";
 	}
 
 	// 가입 페이지 이동
 	@RequestMapping(value = "/memberjoinform")
 	public String join() {
-		return "memberv/memberjoin";
+		return "secu/memberjoin";
 	}
 
 	// 카카오 페이
@@ -119,7 +119,7 @@ public class MemberController {
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/memberloginform")
 	public String login() {
-		return "memberv/memberlogin";
+		return "secu/memberlogin";
 	}
 
 	// 로그인
@@ -164,7 +164,7 @@ public class MemberController {
 		String kakaoUrl = kakaoJoinApi.getAuthorizationUrl(session);
 		mav = new ModelAndView();
 		mav.addObject("kakaoUrl", kakaoUrl);
-		mav.setViewName("memberv/KakaoLogin2");
+		mav.setViewName("secu/KakaoLogin2");
 		return mav;
 
 	}
@@ -177,7 +177,7 @@ public class MemberController {
 		String m_k_id = profile.get("id").asText();
 		mav = new ModelAndView();
 		mav.addObject("m_k_id", m_k_id);
-		mav.setViewName("memberv/memberjoin");
+		mav.setViewName("secu/memberjoin");
 		return mav;
 	}
 
@@ -188,7 +188,7 @@ public class MemberController {
 
 		mav = new ModelAndView();
 		mav.addObject("kakaoUrl", kakaoUrl);
-		mav.setViewName("memberv/KakaoLogin");
+		mav.setViewName("secu/KakaoLogin");
 
 		return mav;
 	}
@@ -208,7 +208,7 @@ public class MemberController {
 		String naverUrl = naverJoinApi.getAuthorizationUrl(session);
 		mav = new ModelAndView();
 		mav.addObject("naverUrl", naverUrl);
-		mav.setViewName("memberv/NaverLogin2");
+		mav.setViewName("secu/NaverLogin2");
 
 		return mav;
 
@@ -230,7 +230,7 @@ public class MemberController {
 		String m_n_id = (String) userInfo.get("id");
 
 		mav.addObject("m_n_id", m_n_id);
-		mav.setViewName("memberv/memberjoin");
+		mav.setViewName("secu/memberjoin");
 
 		return mav;
 	}
@@ -241,7 +241,7 @@ public class MemberController {
 		String naverUrl = naverLoginApi.getAuthorizationUrl(session);
 		mav = new ModelAndView();
 		mav.addObject("naverUrl", naverUrl);
-		mav.setViewName("memberv/NaverLogin");
+		mav.setViewName("secu/NaverLogin");
 
 		return mav;
 	}
@@ -303,7 +303,7 @@ public class MemberController {
 		}
 
 		ModelAndView mv = new ModelAndView(); // ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
-		mv.setViewName("/memberv/memberjoin"); // 뷰의이름
+		mv.setViewName("/secu/memberjoin"); // 뷰의이름
 		mv.addObject("dice", dice);
 
 		System.out.println("mv : " + mv);
@@ -318,9 +318,9 @@ public class MemberController {
 	}
 
 //이메일 인증 페이지 맵핑 메소드
-	@RequestMapping("/memberv/email.do")
+	@RequestMapping("/secu/email.do")
 	public String email() {
-		return "memberv/email";
+		return "secu/email";
 	}
 
 //이메일로 받은 인증번호를 입력하고 전송 버튼을 누르면 맵핑되는 메소드.
@@ -383,4 +383,15 @@ public class MemberController {
 		return resultMsg;
 	}
 
+	
+	
+    @RequestMapping(value="/secu/loginPage")
+    public String page() throws Exception {
+        return "/secu/loginPage";
+    }
+    
+    @RequestMapping(value="/access_denied_page")
+    public String accessDeniedPage() throws Exception {
+        return "/access_denied_page";
+    }
 }

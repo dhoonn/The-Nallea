@@ -19,8 +19,9 @@ public class MemberDTO {
 	private String m_email;
 	private String m_phone;
 	private String m_profile;
-	private String m_auth;
+	private String m_authority;
 	private int m_permit;
+	private int ENABLED;
 	
 	private MultipartFile mfile;
 }

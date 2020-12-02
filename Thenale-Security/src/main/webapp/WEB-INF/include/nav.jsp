@@ -5,11 +5,32 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<s:authentication property="name" var="loginId"/>
 	
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script>
+	function joinform() {
+		location.href = "memberjoinform";
+	}
+	function loginform() {
+		location.href = "memberloginform";
+	}
+	function com() {
+		location.href = "comjoin";
+	}
+	function comlogin() {
+		location.href = "comlogin";
+	}
+	function placesearch() {
+		location.href="placesearch";
+	}
+ 
+</script>
 <style type="text/css">
 /* header */
 body{
@@ -79,7 +100,7 @@ body{
                     <a href="/memberjoinform" style="color: #FFFFFF; text-decoration: none;">회원가입</a></span>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-          	<p style="margin-top: -0.6px; padding-right:157px; "><%=name %>님, 반갑습니다.</p>
+          	<p style="margin-top: -0.6px; padding-right:157px; ">${loginId}님, 반갑습니다.</p>
           </sec:authorize>
         </div>
     </div>
@@ -93,31 +114,45 @@ body{
         </div>
     <div class="topnav">
 			<sec:authorize access="isAnonymous()">
-        <a href="" style="padding-left: 130px; font-size: 35px;">THE NALLAE</a>
+        <a href="/" style="padding-left: 130px; font-size: 35px;">THE NALLAE</a>
         <div class="topnav-right">
-            <a href="">호텔</a>
-            <a href="">즐길거리</a>
-            <a href="">식당</a>
-            <a href="">리뷰</a>
+			<a href="<c:url value='/hotellist'/>">호텔</a>
+			<a href="<c:url value='/placesearch'/>">즐길거리</a>
+			<a href="<c:url value='/foodlist'/>">식당</a>
+			<a href="<c:url value='/reviewlist'/>">리뷰</a>
             <a href="">항공권</a>
 			<a href='<c:url value="/secu/loginPage"/>'>로그인</a>
-			<a href="" style="margin-top: 15px;"><i class="fas fa-search"></i></a>
+			<a href="<c:url value='/areasearch'/>" style="margin-top: 15px;"><i class="fas fa-search" id="h_area"></i></a>
         </div>
 			</sec:authorize> 
       </div>
+			<sec:authorize access="hasRole('ROLE_MEMBER')">
 	<div class="topnav" style="margin-top:-73px">
-			<sec:authorize access="isAuthenticated()">
 		<a href="" style="padding-left: 130px; font-size: 35px;">THE NALLAE</a>
 		<div class="topnav-right">
-			<a href="">호텔</a> 
-			<a href="">즐길거리</a> 
-			<a href="">식당</a> 
-			<a href="">리뷰</a>
+			<a href="<c:url value='/hotellist'/>">호텔</a>
+			<a href="<c:url value='/placesearch'/>">즐길거리</a>
+			<a href="<c:url value='/foodlist'/>">식당</a>
+			<a href="<c:url value='/reviewlist'/>">리뷰</a>
 			<a href="">항공권</a>
-			<a href="">마이페이지</a>
-			<a href="" style="margin-top: 15px;"><i class="fas fa-search"></i></a>
+			<a href="mypage?m_id=${loginId}">마이페이지</a>
+			<a href="<c:url value='/areasearch'/>" style="margin-top: 15px;"><i class="fas fa-search" id="h_area"></i></a>
 		</div>
+</div>
 </sec:authorize>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<div class="topnav" style="margin-top:-73px">
+		<a href="" style="padding-left: 130px; font-size: 35px;">THE NALLAE</a>
+		<div class="topnav-right">
+			<a href="<c:url value='/hotellist'/>">호텔</a>
+			<a href="<c:url value='/placesearch'/>">즐길거리</a>
+			<a href="<c:url value='/foodlist'/>">식당</a>
+			<a href="<c:url value='/reviewlist'/>">리뷰</a>
+			<a href="">항공권</a>
+			<a href="<c:url value='/manager'/>">관리자</a>
+			<a href="<c:url value='/areasearch'/>" style="margin-top: 15px;"><i class="fas fa-search" id="h_area"></i></a>
+		</div>
 	</div>
+</sec:authorize>
 </body>
 </html>

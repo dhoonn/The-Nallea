@@ -60,7 +60,7 @@ public class IndexListService {
 		mav.addObject("hDTO", hDTO);
 		mav.addObject("fDTO", fDTO);
 		mav.addObject("pDTO", pDTO);
-		mav.setViewName("memberv/membercalendar");
+		mav.setViewName("member/memberv/membercalendar");
 		return mav;
 	}
 
@@ -74,7 +74,7 @@ public class IndexListService {
 		mav.addObject("hDTO", hDTO);
 		mav.addObject("fDTO", fDTO);
 		mav.addObject("pDTO", pDTO);
-		mav.setViewName("placev/allplacelist");
+		mav.setViewName("guest/placev/allplacelist");
 		return mav;
 	}
 
@@ -106,7 +106,7 @@ public class IndexListService {
 		
 		mav.addObject("paging", paging);
 		mav.addObject("hDTO", hDTO);
-		mav.setViewName("hotelv/hotellist");
+		mav.setViewName("member/hotelv/hotellist");
 		return mav;
 	}
 
@@ -115,7 +115,7 @@ public class IndexListService {
 		mav = new ModelAndView();
 		List<FoodDTO> fDTO = iDAO.foodList();
 		mav.addObject("fDTO", fDTO);
-		mav.setViewName("foodv/foodlist");
+		mav.setViewName("guest/foodv/foodlist");
 		return mav;
 	}
 
@@ -124,7 +124,7 @@ public class IndexListService {
 		mav = new ModelAndView();
 		List<PlaceDTO> pDTO = iDAO.placeList();
 		mav.addObject("pDTO", pDTO);
-		mav.setViewName("placev/placelist");
+		mav.setViewName("guest/placev/placelist");
 		return mav;
 	}
 }

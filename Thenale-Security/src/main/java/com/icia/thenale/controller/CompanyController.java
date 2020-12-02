@@ -30,13 +30,13 @@ public class CompanyController {
 	// 업체 회원가입 페이지 이동
 	@RequestMapping(value = "/comjoin")
 	public String comjoin() {
-		return "companyv/companyjoin";
+		return "secu/companyjoin";
 	}
 
 	// 업체 회원 로그인 페이지 이동
 	@RequestMapping(value = "/comlogin")
 	public String comlogin() {
-		return "companyv/companylogin";
+		return "secu/companylogin";
 	}
 
 	// 업체 회원가입

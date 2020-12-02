@@ -19,7 +19,7 @@ public class AirController {
 	// 항공권 화면으로
 	@RequestMapping(value = "/goAir")
 	public String goAir() {
-		return "air/airmain";
+		return "member/air/airmain";
 	}
 	
 //	@RequestMapping(value = "/goMap")

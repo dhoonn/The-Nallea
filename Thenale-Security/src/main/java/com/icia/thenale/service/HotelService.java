@@ -43,7 +43,7 @@ public class HotelService {
 
 		hList = hDAO.hotelList(h_area);
 		mav.addObject("hList", hList);
-		mav.setViewName("companyv/hotellist");
+		mav.setViewName("member/hotelv/hotellist");
 
 		return mav;
 	}
@@ -57,7 +57,7 @@ public class HotelService {
 		if (Hits > 0) {
 		mav.addObject("hDTO", hDTO);
 		mav.addObject("hrDTO", hrDTO);
-		mav.setViewName("hotelv/hotelview");
+		mav.setViewName("member/hotelv/hotelview");
 		}
 		return mav;
 	}
@@ -68,7 +68,7 @@ public class HotelService {
 		int addroomResult = hDAO.addmenu(h_c_id);
 		if (addroomResult > 0) {
 			mav.addObject("addroomResult", addroomResult);
-			mav.setViewName("foodv/addroom");
+			mav.setViewName("member/hotelv/addroom");
 
 		}
 		return mav;
@@ -89,7 +89,7 @@ public class HotelService {
 		hotelRoom.setH_hotelimg(h_sublimg);
 		int hotelroomaddResult = hDAO.hotelroomadd(hotelRoom);
 		if (hotelroomaddResult > 0) {
-			mav.setViewName("foodv/addroom");
+			mav.setViewName("member/hotelv/addroom");
 		}
 		return mav;
 	}
