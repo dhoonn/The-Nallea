@@ -7,6 +7,11 @@
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <s:authentication property="name" var="loginId"/>
+
+
+
+
+
 	
 <html>
 <head>
@@ -30,13 +35,60 @@
 		location.href="placesearch";
 	}
  
+	
+	
+	/* 현재 시간 */
+		var dayarray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+	var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+
+	function getthedate(){
+	var mydate=new Date()
+	var year=mydate.getYear()
+	if (year < 1000)
+	year+=1900
+	var day=mydate.getDay()
+	var month=mydate.getMonth()
+	var daym=mydate.getDate()
+	if (daym<10)
+	daym="0"+daym
+	var hours=mydate.getHours()
+	var minutes=mydate.getMinutes()
+	var seconds=mydate.getSeconds()
+	var dn="AM"
+	if (hours>=12)
+	dn="PM"
+	if (hours>12){
+	hours=hours-12
+	}
+	if (hours==0)
+	hours=12
+	if (minutes<=9)
+	minutes="0"+minutes
+	if (seconds<=9)
+	seconds="0"+seconds
+	//change font size here
+	var cdate="<small><font color='#8C8C8C' face='Arial'><b>"+dayarray[day]+", "+montharray[month]+" "+daym+", "+year+" "+hours+":"+minutes+":"+seconds+" "+dn
+	+"</b></font></small>"
+	if (document.all)
+	document.all.clock.innerHTML=cdate
+	else if (document.getElementById)
+	document.getElementById("clock").innerHTML=cdate
+	else
+	document.write(cdate)
+	}
+	if (!document.all&&!document.getElementById)
+	getthedate()
+	function goforit(){
+	if (document.all||document.getElementById)
+	setInterval("getthedate()",1000)
+	}
 </script>
 <style type="text/css">
 /* header */
 body{
     margin: 0;
     font-family: Poppins;
-    font-style: normal;
+    font-style: Poppins;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -89,11 +141,10 @@ body{
 
 </style>
 </head>
-<body>
+<body onLoad="goforit()">
     <div class="top">
         <div>
-            <span style="color: #8C8C8C;">11월 11일 월요일 : </span>
-            <span style="color: #FFFFFF;">9:00 AM - 5:30 PM</span>
+            <span style="color: #8C8C8C;" id="clock"></span>
             <span style="float: right;">
             <sec:authorize access="isAnonymous()">
                     <span style="color: #8C8C8C;">예약 관리 및 웹 사이트의 모든 기능을 이용하시려면 회원가입을 해주세요.
@@ -102,6 +153,7 @@ body{
                 <sec:authorize access="isAuthenticated()">
           	<p style="margin-top: -0.6px; padding-right:157px; ">${loginId}님, 반갑습니다.</p>
           </sec:authorize>
+          </span>
         </div>
     </div>
         <div>

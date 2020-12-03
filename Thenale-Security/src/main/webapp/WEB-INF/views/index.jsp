@@ -37,12 +37,14 @@
 	function areasearch() {
 		location.href="areasearch";
 	}
-	   function calendar(){
-		      location.href="membercalender";
-		   }
+	function calendar(){
+	    location.href="membercalender";
+	}
+
+	
 </script>
 <style>
-/* body    ()*/
+/* body    (body2전까지 수정)*/
 body{
     font-family: Poppins;
     font-style: normal;
